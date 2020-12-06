@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   access.init({
-    name: DataTypes.INTEGER
+    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'access',

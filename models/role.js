@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      role.belongsToMany(models.user, {through: 'models.user_role'});
     }
   };
   role.init({
-    name: DataTypes.INTEGER
+    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'role',
