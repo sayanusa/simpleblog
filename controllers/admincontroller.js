@@ -53,11 +53,19 @@ class adminController {
     static async getUserAccessById (req, res, next){
         const userId = req.params.id;
         try {
-            const found = await user_access.findAll({where: { userId }});
-            res.status(200).json({
+            const find = await user_access.findOne({where: { userId: userId }});
+            if(find){
+                const found = await user_access.findAll({
+                    where: { userId: userId },
+                    include: access
+                });
+                res.status(200).json({
                 message: "user access list",
                 data: found
             })
+            } else {
+                res.status(400).json({message: "user not found!"})
+            }
         } catch (err) {
             next (err);
         }

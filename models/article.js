@@ -11,12 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      article.belongsTo(models.user);
     }
   };
   article.init({
     userId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    body: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Title must not be empty"
+        }
+      }
+    },
+    body: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Body must not be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'article',
